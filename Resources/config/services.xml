@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-      <service id="wmc.swiftmailer_twig" class="WMC\SwiftmailerTwigBundle\TwigSwiftHelper">
+      <service id="wmc.swiftmailer_twig" class="WMC\SwiftmailerTwigBundle\Mailer\TwigSwiftHelper">
         <argument type="service" id="twig"/>
         <argument>%web_directory%</argument>
       </service>
-      <service id="wmc.swiftmailer_twig.fosub" class="WMC\SwiftmailerTwigBundle\FOSUserMailer">
+      <service id="wmc.swiftmailer_twig.fosub" class="WMC\SwiftmailerTwigBundle\Mailer\FOSUserMailer">
         <argument type="service" id="mailer"/>
         <argument type="service" id="router"/>
         <argument type="service" id="wmc.swiftmailer_twig"/>
