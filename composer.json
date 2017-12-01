@@ -19,7 +19,11 @@
     },
     "require": {
         "php": ">=5.3.3",
+<<<<<<< Updated upstream
         "swiftmailer/swiftmailer": ">=4.2.0,~5.0",
+=======
+        "swiftmailer/swiftmailer": ">=4.2.0 || ~5.0 ||~6.0",
+>>>>>>> Stashed changes
         "twig/twig": "~1.23|~2.0",
         "symfony/dom-crawler": "~2.3|~3.0"
     },
