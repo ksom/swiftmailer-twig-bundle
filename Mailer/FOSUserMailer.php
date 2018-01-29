@@ -53,7 +53,7 @@ class FOSUserMailer implements MailerInterface
      */
     protected function sendMessage($templateName, $context, $fromEmail, $toEmail)
     {
-        $message = Swift_Message::newInstance()
+        $message = (new \Swift_Message())
             ->setFrom($fromEmail)
             ->setTo($toEmail);
 
