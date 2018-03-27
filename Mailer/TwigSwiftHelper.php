@@ -5,6 +5,7 @@ namespace WMC\SwiftmailerTwigBundle\Mailer;
 use Swift_Mailer;
 use Swift_Message;
 use Swift_Image;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DomCrawler\Crawler;
 use Twig_Environment;
 
@@ -15,9 +16,9 @@ use Twig_Environment;
 class TwigSwiftHelper
 {
     /**
-     * @var Twig_Environment
+     * @var ContainerInterface
      */
-    protected $twig;
+    protected $container;
 
     /**
      * Used to resolve inline images
@@ -25,16 +26,16 @@ class TwigSwiftHelper
      */
     protected $web_directory;
 
-    public function __construct(Twig_Environment $twig, $web_directory)
+    public function __construct(ContainerInterface $container, $web_directory)
     {
-        $this->twig          = $twig;
+        $this->container = $container;
         $this->web_directory = $web_directory;
     }
 
     protected function extractMessageContent($template_name, $context, $parts = array('subject', 'content' => 'body_text'))
     {
-        $template = $this->twig->loadTemplate($template_name);
-        $context = $this->twig->mergeGlobals($context);
+        $template = $this->container->get('twig')->loadTemplate($template_name);
+        $context = $this->container->get('twig')->mergeGlobals($context);
 
         $data = array();
 
@@ -65,7 +66,7 @@ class TwigSwiftHelper
             $normalized_src = $src = $img->getAttribute('src');
 
             if (isset($replaces['src="'.$src.'"'])) {
-               continue;
+                continue;
             }
 
             // if starting with one slash, use local file
@@ -100,7 +101,7 @@ class TwigSwiftHelper
 
         if (!empty($data['html'])) {
             $message->setBody($data['html'], 'text/html')
-                    ->addPart($data['text'], 'text/plain');
+                ->addPart($data['text'], 'text/plain');
 
             $this->inlineImages($message);
         } else {
