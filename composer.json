@@ -21,7 +21,7 @@
         "php": ">=5.3.3",
         "swiftmailer/swiftmailer": "~6.0",
         "twig/twig": "~1.23|~2.0",
-        "symfony/dom-crawler": "~2.3|~3.0"
+        "symfony/dom-crawler": "~2.3|~3.0|~4.0"
     },
     "suggests": {
         "symfony/swiftmailer-bundle": "With symfony/twig-bundle to have the complete Symfony integration",
